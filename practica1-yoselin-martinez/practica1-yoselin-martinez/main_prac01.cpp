@@ -81,16 +81,51 @@ void myData()
 	float vertices[] =
 	{
 		// positions        // aqui solo lo hace, no lo muestra
-		-0.2f,-0.8f, 0.0f,  //0
-		-0.5f,-0.8f, 0.0f,  //1 
-		-0.5f, 0.8f, 0.0f, //2
-		0.7f, 0.8f, 0.0f,  //3
-		0.7f, 0.5f, 0.0f,	//4
-		-0.2f, 0.5f, 0.0f, //5
-		-0.2f, 0.0f, 0.0f, //6
-		0.2f,0.0f, 0.0f,  //7 
-		0.2f,-0.2f, 0.0f,  //8 
-		-0.2f,-0.2f, 0.0f,  //9 
+		//-0.2f,-0.8f, 0.0f,  //0
+		//-0.5f,-0.8f, 0.0f,  //1 
+		//-0.5f, 0.8f, 0.0f, //2
+		//0.7f, 0.8f, 0.0f,  //3
+		//0.7f, 0.5f, 0.0f,	//4
+		//-0.2f, 0.5f, 0.0f, //5
+		//-0.2f, 0.0f, 0.0f, //6
+		//0.2f,0.0f, 0.0f,  //7 
+		//0.2f,-0.2f, 0.0f,  //8 
+		//-0.2f,-0.2f, 0.0f,  //9 
+
+		-0.2f, -0.6f, 0.0f, //0
+		-0.2f, 0.6f, 0.0f,   //1
+		0.0f, 0.6f, 0.0f,    //2
+
+		-0.2f, -0.6f, 0.0f, //0
+		0.0f, 0.6f, 0.0f,    //2
+		0.0f, -0.6f, 0.0f,   //3
+
+		0.0f, 0.6f, 0.0f,    //2
+		0.4f, 0.6f, 0.0f,  //4
+		0.4f, 0.4f, 0.0f,  //5
+
+		0.0f, 0.6f, 0.0f,    //2
+		0.4f, 0.4f, 0.0f,  //5
+		0.0f, 0.4f, 0.0f,  //6
+
+		0.0f, 0.0f, 0.0f,  //7
+		0.2f, 0.0f, 0.0f,  //8
+		0.0f, -0.2f, 0.0f,  //10
+
+		0.2f, 0.0f, 0.0f,  //8
+		0.0f, -0.2f, 0.0f,  //10
+		0.2f, -0.2f, 0.0f,  //9
+
+
+
+
+
+
+
+
+
+
+
 
 	};
 
@@ -231,11 +266,11 @@ int main()
 
 		glPointSize(10.0); //para darle un tama?o a el punto que se realiza
 		//glDrawElements(GL_POINTS, 5, GL_UNSIGNED_INT, 0);
-		glDrawElements(GL_TRIANGLES, 27, GL_UNSIGNED_INT, 0); //para trabajar con los indices
+		//glDrawElements(GL_TRIANGLES, 27, GL_UNSIGNED_INT, 0); //para trabajar con los indices
 		//DrawArrays(GL_LINES, 0, 10);// se encarga de dibujar la informacion, tipo de dibujo, y rango de valores, COMANDO DE DIBUJO
 		//DrawArrays(GL_POINTS, 4, 1);
 		//DrawArrays(GL_LINE_LOOP, 0,10); //para hacer un poligono y hacer una figura
-		//DrawArrays(GL_TRIANGLES, 2, 3);  //para hacer triangulos
+		glDrawArrays(GL_TRIANGLES, 0, 18);  //para hacer triangulos
 		//DrawArrays(GL_TRIANGLE_STRIP, 0, 6); //para un poligono con relleno
 		//DrawArrays(GL_TRIANGLE_FAN, 0, 6);  //funciona como un abanico en los triangulos
 		//DrawArrays(GL_TRIANGLES, 3, 3);  
