@@ -19,9 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
+<<<<<<< HEAD
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{57e83e12-c8eb-4a9a-86b7-8b2665c32c33}</ProjectGuid>
+=======
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{2e2f5ad7-5699-4b27-8609-ac1c4a8bc6b2}</ProjectGuid>
+>>>>>>> b1f6c2dee49808cb83aa5d7755c09031bbe92746
     <RootNamespace>practica1yoselinmartinez</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -82,7 +88,11 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>lib</AdditionalLibraryDirectories>
+<<<<<<< HEAD
       <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib; $(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+=======
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+>>>>>>> b1f6c2dee49808cb83aa5d7755c09031bbe92746
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -101,7 +111,11 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>lib</AdditionalLibraryDirectories>
+<<<<<<< HEAD
       <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib; $(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+=======
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+>>>>>>> b1f6c2dee49808cb83aa5d7755c09031bbe92746
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

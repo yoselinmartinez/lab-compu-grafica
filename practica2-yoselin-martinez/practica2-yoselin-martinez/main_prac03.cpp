@@ -23,7 +23,7 @@ int SCR_WIDTH = 3800;
 int SCR_HEIGHT = 7600;
 
 GLFWmonitor *monitors;
-GLuint VBO[2], VAO[2], EBO[2];
+GLuint VBO[2], VAO[2], EBO[2]; //aqui va a crear los contenedores Vertex buffer object, vertex array object, element buffer object 
 
 void myData(void);
 void getResolution(void);
@@ -111,7 +111,7 @@ void myData()
 	glGenBuffers(2, EBO);	//Only if we are going to work with index
 
 
-	glBindVertexArray(VAO[0]);
+	glBindVertexArray(VAO[0]); // que las cree en memoria 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesCubo), verticesCubo, GL_STATIC_DRAW);
 
@@ -223,7 +223,7 @@ int main()
 		myShader.setMat4("projection", projectionOp);
 		
 
-		glBindVertexArray(VAO[1]);	//Enable data array [1]
+		glBindVertexArray(VAO[1]);	//Enable data array [1], aqui comienza el dibujo y comienzo a decirle con que info trabaja (es de la letra C)
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[1]); //Only if we are going to work with index
 
 		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));

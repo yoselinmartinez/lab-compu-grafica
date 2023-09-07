@@ -2,7 +2,11 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
+<<<<<<< HEAD
       <FullPath>C:\Users\CGIH09\Documents\lab-compu-grafica\practica1-yoselin-martinez\Debug\practica1-yoselin-martinez.exe</FullPath>
+=======
+      <FullPath>C:\Users\Lenovo\Documents\escuela\lab-compu-grafica\practica1-yoselin-martinez\Debug\practica1-yoselin-martinez.exe</FullPath>
+>>>>>>> b1f6c2dee49808cb83aa5d7755c09031bbe92746
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
