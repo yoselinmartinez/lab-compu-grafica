@@ -29,7 +29,12 @@ void myData(void);
 void getResolution(void);
 
 //For Keyboard
+float movX = 0.0f,
+movY = 0.0f,
+movZ = -11.0f;
 
+float rotY = 0.0f;
+	
 
 
 void getResolution()
@@ -196,8 +201,8 @@ int main()
 	glm::mat4 projectionOp = glm::mat4(1.0f);	//This matrix is for Projection
 
 	//Use "projection" in order to change how we see the information
-	//projectionOp = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-	projectionOp = glm::ortho(-5.0f, 5.0f, -3.0f, 3.0f, 0.1f, 10.0f);
+	projectionOp = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f); // para visualizar en 3d
+	//projectionOp = glm::ortho(-5.0f, 5.0f, -3.0f, 3.0f, 0.1f, 10.0f);//como se va a manejar, 2 primeros X, 2 segundos Y y asi
 
     // render loop
     // While the windows is not closed
@@ -215,7 +220,8 @@ int main()
 		//Mi función de dibujo
 		/*******************************************/
 		//Use "view" in order to affect all models
-		viewOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+		viewOp = glm::translate(glm::mat4(1.0f), glm::vec3(movX, movY, movZ)); //recopila la informacion de la matriz de vista 
+		viewOp = glm::rotate(viewOp, glm::radians(rotY), glm::vec3(0.0f, 1.0f, 0.0f));// va a tomar lo que tiene la vista y de ahi se aplica
 		// pass them to the shaders
 		myShader.setMat4("model", modelOp);
 		myShader.setMat4("view", viewOp);
@@ -229,15 +235,68 @@ int main()
 		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 		myShader.setMat4("model", modelOp);
 		//glDrawArrays(GL_LINE_LOOP, 0, 8); //My C
-		glDrawElements(GL_TRIANGLE_FAN, 6, GL_UNSIGNED_INT, (void*)(0 * sizeof(float)));	//to Draw using index
-		glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, (void*)(6 * sizeof(float)));	//to Draw using index
+		//glDrawElements(GL_TRIANGLE_FAN, 6, GL_UNSIGNED_INT, (void*)(0 * sizeof(float)));	//to Draw using index
+		//glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, (void*)(6 * sizeof(float)));	//to Draw using index
 
 
 		/*-------------------Second figure-------------------*/
-		//glBindVertexArray(VAO[0]);	//Enable data array [0]
-		//modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(1.5f, 0.0f, 0.0f));
-		//myShader.setMat4("model", modelOp);
-		//glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube
+		glBindVertexArray(VAO[0]);	//Enable data array [0]
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.4f, 0.2f, 0.0f));//para darle color a mi cubo, puede funcionar para todos
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube 1
+
+		//modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(2.5f, 4.5f, 0.0f));//aqui son las coordenadas respecto al origen
+		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));// aqui trabaja respecto al cubo anterior(modelop)
+		myShader.setMat4("model", modelOp);// aqui lo dibuja utilizando la matriz de 4x4 
+		myShader.setVec3("aColor", glm::vec3(0.4f, 0.2f, 0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube 2 
+
+		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.4f, 0.2f, 0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube 3 
+
+		modelOp = glm::translate(modelOp, glm::vec3(-1.0f, -1.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.4f, 0.2f, 0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube 4
+
+		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.4f, 0.2f, 0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube 5 
+
+		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.4f, 0.2f, 0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube 6 
+
+		modelOp = glm::translate(modelOp, glm::vec3(-3.0f, -1.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.4f, 0.2f, 0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube 7 
+
+		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.4f, 0.2f, 0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube 8
+
+		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.4f, 0.2f, 0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube 9
+
+		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.4f, 0.2f, 0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube 10
+
+		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.4f, 0.2f, 0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube 1
+
 
 		glBindVertexArray(0);
 		/*****************************************************************/
@@ -259,6 +318,24 @@ void my_input(GLFWwindow *window)
 {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)  //GLFW_RELEASE
         glfwSetWindowShouldClose(window, true);
+
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		movX -= 0.1f;
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		movX += 0.1f;
+	if (glfwGetKey(window, GLFW_KEY_PAGE_DOWN) == GLFW_PRESS)
+		movY -= 0.1f;
+	if (glfwGetKey(window, GLFW_KEY_PAGE_UP) == GLFW_PRESS)
+		movY += 0.1f;
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		movZ -= 0.1f;
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		movZ += 0.1f;
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+		rotY -= 2.1f;
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+		rotY += 2.1f;
+
 
 }
 
