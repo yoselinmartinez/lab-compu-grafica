@@ -31,7 +31,13 @@ void getResolution(void);
 //For Keyboard
 float	movX = 0.0f,
 		movY = 0.0f,
-		movZ = -5.0f;
+		movZ = -15.0f; //para que aparezca mas alejada la figura
+
+float   rotX = 0.0f,
+		rotY = 0.0f,
+		rotZ = 0.0f;
+
+
 
 void getResolution()
 {
@@ -151,6 +157,9 @@ int main()
 	//Use "projection" in order to change how we see the information
 	projectionOp = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
+
+	//glm::mat4 tempCuello = glm::mat4(1.0f); //se recomienda hacer fuera del ciclo de dibujo, aca masomenos
+
     // render loop
     // While the windows is not closed
     while (!glfwWindowShouldClose(window))
@@ -169,6 +178,9 @@ int main()
 		glm::mat4 modelOp = glm::mat4(1.0f);		// initialize Matrix, Use this matrix for individual models
 		//Use "view" in order to affect all models
 		viewOp = glm::translate(glm::mat4(1.0f), glm::vec3(movX, movY, movZ));
+		viewOp = glm::rotate(viewOp, glm::radians(rotX), glm::vec3(1.0f, 0.0f, 0.0f));//van a tomar como referencia la traslacion y apartir de ahi hace la rotacion
+		viewOp = glm::rotate(viewOp, glm::radians(rotY), glm::vec3(0.0f, 1.0f, 0.0f));//tomando en cuenta la rotacion anterior
+		viewOp = glm::rotate(viewOp, glm::radians(rotZ), glm::vec3(0.0f, 0.0f, 1.0f));//tomando en cuenta la rotacion anterior
 		// pass them to the shaders
 		myShader.setMat4("model", modelOp);
 		myShader.setMat4("view", viewOp);
@@ -176,8 +188,89 @@ int main()
 
 		//Model
 		glBindVertexArray(VAO);
-		myShader.setVec3("aColor", glm::vec3(1.0f, 1.0f, 0.0f));
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(4.0f, 5.0f, 1.0f));//0 elimina la variable, al final siempre para que no afecte a lo demas
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(1.0f, 0.0f, 0.0f)); //indica el color
+		glDrawArrays(GL_TRIANGLES, 0, 36); //pecho
+
+		//glm::mat4 tempCuello = glm::mat4(1.0f); //se recomienda hacer fuera del ciclo de dibujo
+
+		//tempCuello = modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 2.75f, 0.0f));
+		//modelOp = glm::scale(modelOp, glm::vec3(0.5f, 0.5f, 1.0f));//0 elimina la variable, al final siempre para que no afecte a lo demas
+		//myShader.setMat4("model", modelOp);
+		
+		//myShader.setVec3("aColor", glm::vec3(1.0f, 1.0f, 1.0f)); //indica el color
+		//glDrawArrays(GL_TRIANGLES, 0, 36); //cuello
+
+		//modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 4.25f, 0.0f));
+		//modelOp = glm::translate(tempCuello, glm::vec3(0.0f, 1.5f, 0.0f));
+		//modelOp = glm::scale(modelOp, glm::vec3(1.5f, 2.5f, 1.0f));//0 elimina la variable, al final siempre para que no afecte a lo demas
+		//myShader.setMat4("model", modelOp);
+		//myShader.setVec3("aColor", glm::vec3(0.0f, 0.0f, 1.0f)); //indica el color
+		//glDrawArrays(GL_TRIANGLES, 0, 36); //cabeza
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 2.75f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(0.5f, 0.5f, 1.0f));//0 elimina la variable, al final siempre para que no afecte a lo demas
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(1.0f, 1.0f, 0.0f)); //indica el color
+		glDrawArrays(GL_TRIANGLES, 0, 36); //cuello
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 4.25f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(1.5f, 2.5f, 1.0f));//0 elimina la variable, al final siempre para que no afecte a lo demas
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(1.0f, 1.0f, 1.0f)); //indica el color
+		glDrawArrays(GL_TRIANGLES, 0, 36); //cabeza
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -3.0f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(4.0f, 1.0f, 1.0f));//0 elimina la variable, al final siempre para que no afecte a lo demas
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.0f, 0.0f, 1.0f)); //indica el color
+		glDrawArrays(GL_TRIANGLES, 0, 36); //cadera
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-1.25f, -5.25f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(1.5f, 3.5f, 1.0f));//0 elimina la variable, al final siempre para que no afecte a lo demas
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.0f, 1.0f, 0.0f)); //indica el color
+		glDrawArrays(GL_TRIANGLES, 0, 36); //pierna izquierda
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(1.25f, -5.25f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(1.5f, 3.5f, 1.0f));//0 elimina la variable, al final siempre para que no afecte a lo demas
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.0f, 1.0f, 0.0f)); //indica el color
+		glDrawArrays(GL_TRIANGLES, 0, 36); //pierna derecha
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-1.75f, -7.375f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(2.5f, 0.75f, 1.0f));//0 elimina la variable, al final siempre para que no afecte a lo demas
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.0f, 1.0f, 1.0f)); //indica el color
+		glDrawArrays(GL_TRIANGLES, 0, 36); //pie izquierdo
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(1.75f, -7.375f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(2.5f, 0.75f, 1.0f));//0 elimina la variable, al final siempre para que no afecte a lo demas
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.0f, 1.0f, 1.0f)); //indica el color
+		glDrawArrays(GL_TRIANGLES, 0, 36); //pie derecho
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-2.75f, 2.25f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(1.5f, 0.5f, 1.0f));//0 elimina la variable, al final siempre para que no afecte a lo demas
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.0f, 1.0f, 1.0f)); //indica el color
+		glDrawArrays(GL_TRIANGLES, 0, 36); //brazo izquierdo
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(2.75f, 2.25f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(1.5f, 0.5f, 1.0f));//0 elimina la variable, al final siempre para que no afecte a lo demas
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.0f, 1.0f, 1.0f)); //indica el color
+		glDrawArrays(GL_TRIANGLES, 0, 36); //brazo derecho
+
+		//modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-3.0f, -2.25f, 0.0f));
+		//modelOp = glm::scale(modelOp, glm::vec3(1.0f, 3.5f, 1.0f));//0 elimina la variable, al final siempre para que no afecte a lo demas
+		//myShader.setMat4("model", modelOp);
+		//myShader.setVec3("aColor", glm::vec3(0.0f, 1.0f, 1.0f)); //indica el color
+		//glDrawArrays(GL_TRIANGLES, 0, 36); //mano izquierda
+
+
 
 
 		glBindVertexArray(0);
@@ -200,17 +293,30 @@ void my_input(GLFWwindow *window)
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)  //GLFW_RELEASE
         glfwSetWindowShouldClose(window, true);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		movX += 0.08f;
+		movX += 0.03f;
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		movX -= 0.08f;
+		movX -= 0.03f;
 	if (glfwGetKey(window, GLFW_KEY_PAGE_UP) == GLFW_PRESS)
-		movY += 0.08f;
+		movY += 0.03f;
 	if (glfwGetKey(window, GLFW_KEY_PAGE_DOWN) == GLFW_PRESS)
-		movY -= 0.08f;
+		movY -= 0.03f;
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		movZ -= 0.08f;
+		movZ -= 0.03f;
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		movZ += 0.08f;
+		movZ += 0.03f;
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		rotX -= 3.0f;
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		rotX += 3.0f;
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+		rotY -= 3.0f;
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+		rotY += 3.0f;
+	if (glfwGetKey(window, GLFW_KEY_HOME) == GLFW_PRESS)
+		rotZ -= 3.0f;
+	if (glfwGetKey(window, GLFW_KEY_END) == GLFW_PRESS)
+		rotZ += 3.0f;
+
 
 }
 
